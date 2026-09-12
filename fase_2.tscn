@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bbrn87tugt0pv" path="res://player.tscn" id="1_qxik6"]
 [ext_resource type="Texture2D" uid="uid://cwgtbcotbhpeo" path="res://assets/Seasonal Tilesets/3 - Tropics/Terrain (16 x 16).png" id="2_xe686"]
+[ext_resource type="PackedScene" uid="uid://dtbdjgmjpcnjy" path="res://portal.tscn" id="3_xe686"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_47a2j"]
 texture = ExtResource("2_xe686")
@@ -92,3 +93,6 @@ position = Vector2(73, 117)
 [node name="chão2" type="TileMapLayer" parent="." unique_id=1310545982]
 tile_map_data = PackedByteArray("AAAEAAoAAQABAAMAAAAEAAsAAQABAAQAAAAFAAoAAQACAAMAAAAFAAsAAQACAAQAAAAGAAgAAQADAAEAAAAGAAkAAQADAAIAAAAGAAoAAQADAAMAAAAGAAsAAQADAAQAAAAGAAwAAQADAAUAAAAGAA0AAQADAAYAAAAHAAgAAQAEAAEAAAAHAAkAAQAEAAIAAAAHAAoAAQAEAAMAAAAHAAsAAQAEAAQAAAAHAAwAAQAEAAUAAAAHAA0AAQAEAAYAAAAHAA8AAQAEAAgAAAAIAAgAAQAFAAEAAAAIAAkAAQAFAAIAAAAIAAoAAQAFAAMAAAAIAAsAAQAFAAQAAAAIAAwAAQAFAAUAAAAIAA0AAQAFAAYAAAAJAAoAAQAGAAMAAAAJAAsAAQAGAAQAAAAKAAoAAQAHAAMAAAAKAAsAAQAHAAQAAAAMAAoAAQAJAAMAAAANAAoAAQAKAAMAAAAOAAgAAQALAAEAAAAOAAkAAQALAAIAAAAOAAoAAQALAAMAAAAOAAsAAQALAAQAAAAOAAwAAQALAAUAAAAPAAoAAQAMAAMAAAAQAAoAAQANAAMAAAASAAoAAQAPAAMAAAA=")
 tile_set = SubResource("TileSet_ycner")
+
+[node name="Portal" parent="." unique_id=149374761 instance=ExtResource("3_xe686")]
+position = Vector2(24, -35)

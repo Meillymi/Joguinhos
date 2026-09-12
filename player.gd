@@ -1,33 +1,42 @@
 extends CharacterBody2D
 
-const RUN_SPEED = 1000.0
-const DESACELERACAO = 600.0
-const WALK_SPEED = 100.0
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
+@onready var animacao: AnimatedSprite2D = $AnimatedSprite2D
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
+	# 1. Aplica a gravidade enquanto estiver no ar
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Handle jump.
+	# 2. Inicia o salto se estiver no chão e apertar o botão de pulo
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
-# Descobre se o botão de correr está apertado
-	var current_speed = SPEED
-	if Input.is_key_pressed(KEY_SHIFT):
-		current_speed = RUN_SPEED
-	elif Input.is_key_pressed(KEY_ALT):
-		current_speed = WALK_SPEED
-
-	# Aplica a velocidade baseada na direção e se está correndo
-	var direction = Input.get_axis("ui_left", "ui_right")
+	# 3. Calcula o movimento horizontal e a orientação visual
+	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction:
-		velocity.x = direction * current_speed
+		velocity.x = direction * SPEED
+		animacao.scale.x = direction
 	else:
-		velocity.x = move_toward(velocity.x, 0, DESACELERACAO * delta)
+		velocity.x = move_toward(velocity.x, 0, SPEED)
 
+	# 4. Move o personagem com a física
 	move_and_slide()
+
+	# 5. Controle de Animação com Prioridades (Atividade 4)
+	if not is_on_floor():
+		# Prioridade 1: No ar (subindo ou caindo)
+		animacao.play("jump")
+	elif direction != 0:
+		# Prioridade 2: No chão e se movendo
+		animacao.play("run")
+	else:
+		# Prioridade 3: No chão e parado
+		animacao.play("idle")
+
+	# 6. Reset de posição e velocidade ao cair da plataforma
+	if position.y > 500:
+		position.y = 0
+		velocity = Vector2.ZERO
